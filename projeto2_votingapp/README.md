@@ -1,88 +1,72 @@
-# projeto2_votingapp
 
-This is a Next.js app containing:
+---
 
-- Tailwind CSS setup for styling
-- Useful wallet UI elements setup using [@solana/web3.js](https://www.npmjs.com/package/@solana/web3.js)
-- A basic Counter Solana program written in Anchor
-- UI components for interacting with the Counter program
+## ✅ Projeto 2: Voting App
 
-## Getting Started
+Iniciado seguindo o vídeo oficial do bootcamp:
 
-### Installation
+🔗 [Bootcamp Oficial - YouTube](https://www.youtube.com/watch?v=amAq-WHAFs8)
 
-#### Download the template
+### 📦 Objetivo
 
-```shell
-pnpm create solana-dapp@latest -t gh:solana-developers/solana-templates/legacy/projeto2_votingapp
-```
+Criar um programa em Solana que permite que usuários votem em propostas pré-definidas.  
+O foco está em reforçar conceitos de:
 
-#### Install Dependencies
+- Estrutura de contas com Anchor (`#[account]`)
+- Instruções com validações
+- Contadores persistentes
+- Gerenciamento de usuários e votos
 
-```shell
-pnpm install
-```
+### 🔨 Progresso
 
-## Apps
+- Pasta criada com `npx create-solana-dapp` (scaffold)
+- Projeto inicializado no terminal WSL no diretório `~/solana-projects/solanaofficialbootcamp/`
+- Ambiente de desenvolvimento com:
+  - Rust 1.79.0
+  - Anchor 0.31.1 via AVM
+  - Solana CLI instalado e atualizado
+  - VSCode com Remote WSL configurado
 
-### anchor
+---
 
-This is a Solana program written in Rust using the Anchor framework.
+## 📚 Conceitos abordados e estudados recentemente
 
-#### Commands
+### ⚙️ Ambiente e CLI
 
-You can use any normal anchor commands. Either move to the `anchor` directory and run the `anchor` command or prefix the
-command with `pnpm`, eg: `pnpm anchor`.
+- `solana-test-validator`: simula localmente o ambiente blockchain para testes
+- `anchor init`, `build`, `deploy`, `test`: comandos principais da Anchor CLI
+- Integração com VSCode + WSL para desenvolvimento fluido
 
-#### Sync the program id:
+### ⛓ Conceitos de Blockchain (Solana):
 
-Running this command will create a new keypair in the `anchor/target/deploy` directory and save the address to the
-Anchor config file and update the `declare_id!` macro in the `./src/lib.rs` file of the program.
+- **Slot**: unidade de tempo fixa (~400ms); cada slot tem um líder de bloco
+- **Bloco**: proposto por um único líder por slot
+- **Skipped slots**: slots sem bloco; não afetam o relógio da rede, mas reduzem throughput
+- **Proof of History (PoH)**: mecanismo de ordenação determinística das transações no tempo
+- **Tower BFT**: algoritmo de consenso que empilha votos com lockouts crescentes
+- **Leader Schedule**: cronograma determinístico de qual validador será o líder em cada slot
+- **Double-voting**: tentativa maliciosa de votar em mais de um fork — detectável e penalizável
+- **Sealevel**: motor de execução paralela que permite transações simultâneas na Solana
 
-You will manually need to update the constant in `anchor/lib/counter-exports.ts` to match the new program id.
+---
 
-```shell
-pnpm anchor keys sync
-```
+## 🔐 Discussões de arquitetura e resiliência
 
-#### Build the program:
+- Impacto dos skipped slots na performance e escalabilidade global
+- Comparativo técnico entre Solana e Ethereum (PoS) em termos de liderança, paralelismo e segurança
+- Pontos fortes e riscos do modelo de liderança único por slot
+- Recuperação da Solana após a falha de 2022 e melhorias na rede
 
-```shell
-pnpm anchor-build
-```
+---
 
-#### Start the test validator with the program deployed:
+## 🚀 Próximos passos
 
-```shell
-pnpm anchor-localnet
-```
+- Implementar estrutura de conta de propostas e votos
+- Criar instruções para votação
+- Escrever testes de integração com Anchor
+- Documentar endpoints e lógica de negócios
 
-#### Run the tests
+---
 
-```shell
-pnpm anchor-test
-```
-
-#### Deploy to Devnet
-
-```shell
-pnpm anchor deploy --provider.cluster devnet
-```
-
-### web
-
-This is a React app that uses the Anchor generated client to interact with the Solana program.
-
-#### Commands
-
-Start the web app
-
-```shell
-pnpm dev
-```
-
-Build the web app
-
-```shell
-pnpm build
-```
+> Documentado com base nos estudos e avanços práticos no bootcamp Solana.  
+> Autor: Gabriel Baruque
